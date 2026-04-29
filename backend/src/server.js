@@ -67,3 +67,11 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`ACITY CONNECT API running on port ${port}`);
 });
+
+const cors = require("cors");
+
+app.use(cors({
+  origin: "https://elliotakayete-pixel.github.io",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
