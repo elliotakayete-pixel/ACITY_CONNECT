@@ -57,10 +57,14 @@ The frontend runs at `http://localhost:5173` by default.
 1. Deploy the backend to Render first.
 2. Set `VITE_API_URL` to the Render API URL ending in `/api`.
 3. Set `VITE_BASE_PATH` to your repository path, for example `/acity-connect/`.
-4. Build and deploy:
+4. In GitHub repo settings, set Pages source to `GitHub Actions`.
+5. Add `VITE_API_URL` as a repository Actions variable.
+6. Push to `main` and the included workflow deploys the frontend.
+
+Manual local build check:
 
 ```bash
-npm run deploy
+npm run build
 ```
 
 The app uses `HashRouter`, which keeps routes working on GitHub Pages refreshes.

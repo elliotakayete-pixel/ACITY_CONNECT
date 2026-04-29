@@ -109,3 +109,40 @@ Frontend:
 - GitHub Pages frontend: `https://your-github-username.github.io/your-repo-name/`
 
 Update these links after deployment.
+
+## Deployment
+
+### Backend on Render
+
+This repo includes `render.yaml` for a Render Blueprint. It creates:
+
+- A Node web service for `backend`
+- A Render PostgreSQL database
+- A generated `JWT_SECRET`
+- A `DATABASE_URL` that points to the Render database
+
+Steps:
+
+1. Push this repo to GitHub.
+2. In Render, create a new Blueprint from the GitHub repo.
+3. During setup, enter `FRONTEND_URL` as your GitHub Pages origin, for example `https://your-github-username.github.io`.
+4. Deploy the Blueprint.
+5. Note the backend URL, for example `https://acity-connect-backend.onrender.com`.
+
+The backend start command runs `npm run db:init && npm start`, so the database schema is applied automatically.
+
+### Frontend on GitHub Pages
+
+This repo includes `.github/workflows/deploy-frontend.yml`.
+
+Steps:
+
+1. In GitHub, open the repo settings.
+2. Go to `Pages`.
+3. Set the build and deployment source to `GitHub Actions`.
+4. Go to `Settings` -> `Secrets and variables` -> `Actions` -> `Variables`.
+5. Add `VITE_API_URL` with your Render API URL, for example `https://acity-connect-backend.onrender.com/api`.
+6. Optionally add `VITE_BASE_PATH` with `/your-repo-name/`. If you skip it, the workflow uses `/<repo-name>/`.
+7. Push to `main`, or run the workflow manually from the `Actions` tab.
+
+After the frontend deploys, update Render's `FRONTEND_URL` to the real GitHub Pages origin if it changed. Use only the origin, for example `https://your-github-username.github.io`, not the `/repo-name` path.

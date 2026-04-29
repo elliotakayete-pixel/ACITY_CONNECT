@@ -72,13 +72,19 @@ npm run db:seed
 
 ## Render Deployment
 
-1. Create a PostgreSQL database on Render.
-2. Create a Render Web Service from the repository.
-3. Set the root directory to `backend`.
-4. Use `npm install` as the build command.
-5. Use `npm start` as the start command.
-6. Add the environment variables above using the Render PostgreSQL connection string.
-7. Run `npm run db:init` with the Render database connection string before using the app.
+The root `render.yaml` can deploy the backend and a PostgreSQL database as a Render Blueprint.
+
+1. Push the repository to GitHub.
+2. In Render, create a new Blueprint from the repository.
+3. Enter `FRONTEND_URL` when prompted.
+4. Deploy the Blueprint.
+
+The Blueprint uses:
+
+- Root directory: `backend`
+- Build command: `npm install`
+- Start command: `npm run db:init && npm start`
+- Database connection: `DATABASE_URL` from the Render PostgreSQL service
 
 ## Deployment Link
 
